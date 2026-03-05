@@ -17,8 +17,22 @@ html {
 }
 
 body {
+  position: relative;
   font-family: "Roboto", sans-serif;
   margin: 0;
+}
+
+.bg-cover {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  max-width: 100%;
+}
+@media (max-width: 768px) {
+  .bg-cover {
+    max-width: 25%;
+  }
 }
 
 button {
