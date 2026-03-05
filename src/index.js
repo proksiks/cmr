@@ -393,6 +393,11 @@ async function submitQuiz() {
     finalEl.classList.add("active");
   }
 
+  // Отправка цели в Яндекс.Метрику
+  if (typeof ym !== "undefined") {
+    ym(107162261, 'reachGoal', 'order');
+  }
+
   if (typeof gtag !== "undefined") {
     gtag("event", "conversion", { send_to: "YOUR_CONVERSION_ID" });
   }
