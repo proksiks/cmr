@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЦМР | Центр миграционных решений</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./src/index.css">
+
+</head>
+<body>
+    <header class="header">
+        <div class="header__container container">
+            <div class="header__logo">
+                <span class="header__logo_orange">ЦМР</span>
+                Центр <br /> миграционных <br /> решений
+            </div>
+            <div class="header__contacts">
+                <div class="header__phone">
+                    <a href="tel:+70001234567" class="header__phone-number">+7 (000) 123 45 67</a>
+                </div>
+                <a href="#" class="header__button btn">Узнайте подробности 0₽</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="hero">
+                <h1 class="hero__title">
+                    Хотите российский паспорт в Москве?
+                </h1>
+                <p class="hero__text">
+                    Профессиональная помощь с РВП, ВНЖ и гражданством <br />
+                    Минимизируем риски и экономим ваше время
+                </p>
+            </div>
+
+            <div class="steps">
+                <!-- step 1 -->
+                <div class="step active" data-step="1">
+                    <div class="step__left">
+                        <div class="step__title">Гражданином какой <br /> страны вы являетесь?</div>
+                        <div class="step__text">Введите вашу страну и выберите регион</div>
+
+                        <div class="step__bottom">
+                            <label class="step__label" for="country">Страна гражданства</label>
+                            <input class="step__input" type="text" id="country"
+                                placeholder="Например: Узбекистан, Таджикистан, Казахстан...">
+                        </div>
+                    </div>
+                    <div class="step__right">
+                        <div class="step__sub-title">В каком регионе вы находитесь?</div>
+                        <div class="step__options">
+                            <div class="step__checkbox" data-value="Москва">
+                                <img src="./images/icons/item-1.svg" alt="Иконка">
+                                Москва
+                            </div>
+                            <div class="step__checkbox" data-value="Московская область">
+                                <img src="./images/icons/item-2.svg" alt="Иконка">
+                                Московская область
+                            </div>
+                            <div class="step__checkbox" data-value="Другой регион">
+                                <img src="./images/icons/item-3.svg" alt="Иконка">
+                                Другой регион
+                            </div>
+                        </div>
+                        <button type="button" class="step__button" id="btnStep1">Далее</button>
+                    </div>
+                </div>
+                <!-- step 2 -->
+                <div class="step" data-step="2">
+                    <div class="step__left">
+                        <div class="step__title">Есть ли у вас близкие родственники, являющиеся гражданами РФ?</div>
+                        <div class="step__text">Это поможет нам подобрать оптимальную программу</div>
+                    </div>
+                    <div class="step__right">
+                        <div class="step__sub-title">Это поможет нам подобрать оптимальную программу</div>
+                        <div class="step__options">
+                            <div class="step__checkbox" data-value="Да. Муж/Жена">
+                                <img src="./images/icons/item-4.svg" alt="Иконка">
+                                Да. Муж/Жена
+                            </div>
+                            <div class="step__checkbox" data-value="Да. Родители">
+                                <img src="./images/icons/item-5.svg" alt="Иконка">
+                                Да. Родители
+                            </div>
+                            <div class="step__checkbox" data-value="Да. Другие родственники">
+                                <img src="./images/icons/item-6.svg" alt="Иконка">
+                                Да. Другие родственники
+                            </div>
+                            <div class="step__checkbox" data-value="Нет">
+                                <img src="./images/icons/item-7.svg" alt="Иконка">
+                                Нет
+                            </div>
+                        </div>
+                        <div class="step__buttons-row">
+                            <button type="button" class="step__button step__button_prev">Назад</button>
+                            <button type="button" class="step__button" id="btnStep2">Далее</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- step 3 -->
+                <div class="step" data-step="3">
+                    <div class="step__left">
+                        <div class="step__title">Какой вид документов или помощь Вам нужна?</div>
+                        <div class="step__text">Выберите услугу из списка</div>
+                    </div>
+                    <div class="step__right">
+                        <div class="step__sub-title">Выберите услугу из списка</div>
+                        <div class="step__grid">
+                            <div class="step__checkbox" data-value="Получение гражданства РФ">
+                                Получение гражданства РФ
+                            </div>
+                            <div class="step__checkbox" data-value="Попали в реестр контролируемых лиц">
+                                Попали в реестр контролируемых лиц
+                            </div>
+                            <div class="step__checkbox" data-value="Получение РВП">
+                                Получение РВП
+                            </div>
+                            <div class="step__checkbox" data-value="Вопрос патента">
+                                Вопрос патента
+                            </div>
+                            <div class="step__checkbox" data-value="Получение ВНЖ">
+                                Получение ВНЖ
+                            </div>
+                            <div class="step__checkbox" data-value="Временная регистрация">
+                                Временная регистрация
+                            </div>
+                            <div class="step__checkbox" data-value="Обжалование депортации/выдворения">
+                                Обжалование депортации/выдворения
+                            </div>
+                            <div class="step__checkbox" data-value="Продление миграционной карты">
+                                Продление миграционной карты
+                            </div>
+                        </div>
+                        <div class="step__buttons-row">
+                            <button type="button" class="step__button step__button_prev">Назад</button>
+                            <button type="button" class="step__button" id="btnStep3">Далее</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- step 4 -->
+                <div class="step" data-step="4">
+                    <div class="step__left">
+                        <div class="step__title">Записаться на БЕСПЛАТНУЮ КОНСУЛЬТАЦИЮ!</div>
+                        <div class="step__text">Заполните форму и мы свяжемся с вами в течении 30 минут!</div>
+                    </div>
+                    <div class="step__right step__right_large">
+                        <div class="step__sub-title">В каком регионе вы находитесь?</div>
+                        <div class="step__inputs">
+                            <label class="step__label" for="name">Ваше Имя</label>
+                            <input class="step__input" type="text" id="name" placeholder="Иванов Иван">
+                        </div>
+                        <div class="step__inputs">
+                            <label class="step__label" for="phone">Ваш номер телефона</label>
+                            <input class="step__input" type="tel" id="phone" placeholder="+7 (000) 000 00 00">
+                        </div>
+                        <div class="step__info">
+                            <div class="step__info-text">
+                                Нажимая кнопку, вы соглашаетесь с обработкой персональных данных и политикой
+                                конфиденциальности
+                            </div>
+                        </div>
+                        <div class="step__buttons-row">
+                            <button type="button" class="step__button step__button_prev" onclick="prevStep()">Назад</button>
+                            <button type="button" class="step__button" id="btnStep4" onclick="submitQuiz()">Отправить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- error-region -->
+                <div class="step" data-step="error-step-location">
+                    <div class="step__error">
+                        <div class="step__error-title">К сожалению, мы не можем <br /> Вам помочь!</div>
+                        <div class="step__error-text">Мы работаем только в Москве и Московской области. В
+                            других регионах услуги не оказываем.</div>
+                        <button type="button" class="step__button step__button-error" onclick="restartQuiz()">Начать
+                            заново</button>
+                    </div>
+                </div>
+                <!-- error-location -->
+                <div class="step" data-step="error-step-registration">
+                    <div class="step__error">
+                        <div class="step__error-title">К сожалению, мы не можем <br /> Вам помочь!</div>
+                        <div class="step__error-text">Извините, Наше Агенство не может помочь Вам в этом
+                            вопросе! Обращайтесь в территориальный отдел по вопросам миграции!</div>
+                        <button type="button" class="step__button step__button-error" onclick="restartQuiz()">Начать
+                            заново</button>
+                    </div>
+                </div>
+                <!-- success -->
+                <div class="step" data-step="final-step">
+                    <div class="step__success">
+                        <div class="step__success-title">Спасибо, мы свяжемся с вами в течении 30 минут!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__container container">
+            <div class="footer__text">
+                Общество с ограниченной ответственностью «Трастфинансгрупп»:г.МОСКВА, ВН.ТЕР.Г.МУНИЦИПАЛЬНЫЙ ОКРУГ
+                ДАНИЛОВСКИЙ, ПР-КТ АНДРОПОВА, Д.10, ПОМЕЩ.170 ОГРН: 1237700424862 г. Москва, ул. Лобанова, д.2/21
+            </div>
+            <div class="footer__under">
+                <div class="footer__link">Политика конфиденциальности</div>
+                <div class="footer__link">Добровольное согласие на обработку данных</div>
+                <div class="footer__copy">© [Центр миграционных решений], 2026</div>
+            </div>
+        </div>
+    </footer>
+    <script src="./src/index.js"></script>
+</body>
+</html>
