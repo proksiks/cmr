@@ -75,13 +75,16 @@
                                 Другой регион
                             </div>
                         </div>
-                        <button type="button" class="step__button" id="btnStep2">Далее</button>
+                        <div class="step__buttons-row">
+                            <!-- <button type="button" class="step__button step__button_prev">Назад</button> -->
+                        </div>
                     </div>
                 </div>
                 <!-- step 3 -->
                 <div class="step" data-step="3">
                     <div class="step__left">
                         <div class="step__title">Есть ли у вас близкие родственники, являющиеся гражданами РФ?</div>
+                        <div class="step__text">Это поможет нам подобрать оптимальную программу</div>
                     </div>
                     <div class="step__right">
                         <div class="step__sub-title">Это поможет нам подобрать оптимальную программу</div>
@@ -104,8 +107,7 @@
                             </div>
                         </div>
                         <div class="step__buttons-row">
-                            <button type="button" class="step__button step__button_prev">Назад</button>
-                            <button type="button" class="step__button" id="btnStep3">Далее</button>
+                            <!-- <button type="button" class="step__button step__button_prev">Назад</button> -->
                         </div>
                     </div>
                 </div>
@@ -143,8 +145,7 @@
                             </div>
                         </div>
                         <div class="step__buttons-row">
-                            <button type="button" class="step__button step__button_prev">Назад</button>
-                            <button type="button" class="step__button" id="btnStep4">Далее</button>
+                            <!-- <button type="button" class="step__button step__button_prev">Назад</button> -->
                         </div>
                     </div>
                 </div>
@@ -155,23 +156,27 @@
                         <div class="step__text">Заполните форму и мы свяжемся с вами в течении 30 минут!</div>
                     </div>
                     <div class="step__right step__right_large">
+                        <div class="step__sub-title">Оставьте ваши контакты</div>
                         <div class="step__inputs">
                             <label class="step__label" for="name">Ваше Имя</label>
-                            <input class="step__input" type="text" id="name" placeholder="Иванов Иван" oninput="checkForm()">
+                            <input class="step__input" type="text" id="name" placeholder="Иванов Иван"
+                                oninput="checkForm()">
                         </div>
                         <div class="step__inputs">
                             <label class="step__label" for="phone">Ваш номер телефона</label>
-                            <input class="step__input" type="tel" id="phone" placeholder="+7 (000) 000 00 00" oninput="formatPhone(this); checkForm()">
+                            <input class="step__input" type="tel" id="phone" placeholder="+7 (000) 000 00 00"
+                                oninput="formatPhone(this); checkForm()">
                         </div>
                         <div class="step__info">
                             <div class="step__info-text">
                                 Нажимая кнопку, вы соглашаетесь с обработкой персональных данных и политикой
                                 конфиденциальности
                             </div>
-                        </div>
-                        <div class="step__buttons-row">
-                            <button type="button" class="step__button step__button_prev" onclick="prevStep()">Назад</button>
-                            <button type="button" class="step__button" id="btnStep5" onclick="submitQuiz()" disabled>Отправить</button>
+                            <div class="step__buttons-row">
+                                <!-- <button type="button" class="step__button step__button_prev" onclick="prevStep()">Назад</button> -->
+                                <button type="button" class="step__button" id="btnStep5" onclick="submitQuiz()"
+                                    disabled>Отправить</button>
+                            </div>
                         </div>
                     </div>
                 </div>

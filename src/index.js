@@ -81,6 +81,37 @@ function selectOption(element, step) {
   if (step === 2) {
     checkStep2();
   }
+
+  // Автоматический переход на следующий шаг для шагов 2, 3, 4
+  if (step >= 2 && step < totalSteps) {
+    // Небольшая задержка для визуального эффекта
+    setTimeout(() => {
+      // Проверяем, нужно ли показать ошибку
+      if (step === 2 && element.dataset.value === "Другой регион") {
+        showErrorStep("error-step-location");
+        return;
+      }
+      if (step === 4 && element.dataset.value === "Временная регистрация") {
+        showErrorStep("error-step-registration");
+        return;
+      }
+      // Переход на следующий шаг
+      nextStepAuto(step);
+    }, 300);
+  }
+}
+
+// Автоматический переход на следующий шаг (без валидации, так как выбор уже сделан)
+function nextStepAuto(fromStep) {
+  const currentEl = document.querySelector(`.step[data-step="${fromStep}"]`);
+  if (currentEl) {
+    currentEl.classList.remove("active");
+  }
+  currentStep = fromStep + 1;
+  const nextEl = document.querySelector(`.step[data-step="${currentStep}"]`);
+  if (nextEl) {
+    nextEl.classList.add("active");
+  }
 }
 
 // Форматирование телефона
@@ -249,6 +280,7 @@ function showErrorStep(stepName) {
 
 // Перезапуск формы
 function restartQuiz() {
+  isSubmitting = false;
   document
     .querySelectorAll(".step")
     .forEach((step) => step.classList.remove("active"));
@@ -309,14 +341,28 @@ function prevStep() {
 }
 
 // Отправка формы
+let isSubmitting = false;
+
 async function submitQuiz() {
+  // Защита от повторной отправки
+  if (isSubmitting) return;
+  
   const nameEl = document.getElementById("name");
   const phoneEl = document.getElementById("phone");
   const countryEl = document.getElementById("country");
+  const btnEl = document.getElementById("btnStep5");
 
   const name = nameEl ? nameEl.value : "";
   const phone = phoneEl ? phoneEl.value : "";
   const country = countryEl ? countryEl.value : "";
+
+  // Блокируем кнопку
+  isSubmitting = true;
+  if (btnEl) {
+    btnEl.disabled = true;
+    btnEl.textContent = "Отправка...";
+    btnEl.classList.add("loading");
+  }
 
   quizData.name = name;
   quizData.phone = phone;
@@ -324,7 +370,14 @@ async function submitQuiz() {
 
   const success = await sendToTelegram(quizData);
 
+  // Разблокируем кнопку при ошибке
   if (!success) {
+    isSubmitting = false;
+    if (btnEl) {
+      btnEl.disabled = false;
+      btnEl.textContent = "Отправить";
+      btnEl.classList.remove("loading");
+    }
     alert(
       "Ошибка отправки! Пожалуйста, позвоните нам по телефону +7 (000) 123 45 67",
     );

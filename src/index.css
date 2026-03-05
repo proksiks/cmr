@@ -283,7 +283,7 @@ button {
 }
 .step__button {
   margin-top: auto;
-  max-width: 15.25rem;
+  max-width: 17.5rem;
   width: 100%;
   text-align: center;
   padding: 1.5rem;
@@ -297,10 +297,18 @@ button {
   transition: transform 0.25s ease-in-out;
   color: var(--orange);
 }
+#btnStep5 {
+  width: 17.5rem;
+}
 
 .step__button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.step__button.loading {
+  opacity: 0.7;
+  cursor: wait;
 }
 
 .step__button:not(:disabled):hover {
@@ -312,21 +320,11 @@ button {
   transform: translateY(-0.0625rem);
 }
 
-.step__buttons-row {
-  display: flex;
-  gap: 1rem;
-  margin-top: auto;
-}
-
-.step__buttons-row .step__button {
-  flex: 1;
-  max-width: none;
-}
-
 .step__button_prev {
   background-color: transparent;
   border: 2px solid white;
   color: white;
+  max-width: 17.5rem;
 }
 
 .step__button_prev:not(:disabled):hover {
@@ -338,6 +336,7 @@ button {
 }
 
 .step__info {
+  width: 100%;
   margin-top: 1.5rem;
   display: flex;
   align-items: center;
@@ -547,14 +546,6 @@ button {
     font-size: 1rem;
     margin-left: 0;
     margin-top: 1.5rem;
-  }
-
-  .step__buttons-row {
-    flex-direction: column;
-  }
-
-  .step__buttons-row .step__button {
-    margin-top: 0;
   }
 
   .step__inputs {
