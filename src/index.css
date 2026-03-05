@@ -137,17 +137,28 @@ button {
 .step[data-step="1"],
 .step[data-step="2"],
 .step[data-step="3"],
-.step[data-step="4"] {
+.step[data-step="4"],
+.step[data-step="5"] {
   display: none;
   min-height: 29.0625rem;
-  flex-direction: row;
   justify-content: space-between;
+}
+
+@media (max-width: 480px) {
+  .step[data-step="1"],
+  .step[data-step="2"],
+  .step[data-step="3"],
+  .step[data-step="4"],
+  .step[data-step="5"] {
+    min-height: auto;
+  }
 }
 
 .step[data-step="1"].active,
 .step[data-step="2"].active,
 .step[data-step="3"].active,
-.step[data-step="4"].active {
+.step[data-step="4"].active,
+.step[data-step="5"].active {
   display: flex;
   animation: fadeIn 0.3s ease;
 }
@@ -215,9 +226,10 @@ button {
 }
 
 .step__options_error {
-  outline: 2px solid red;
+  outline: 3px solid red !important;
   border-radius: 0.75rem;
   padding: 0.25rem;
+  background-color: rgba(255, 0, 0, 0.1) !important;
 }
 .step__input {
   display: block;
@@ -319,6 +331,10 @@ button {
 
 .step__button_prev:not(:disabled):hover {
   background-color: rgba(255, 255, 255, 0.1);
+}
+
+.step__country {
+  margin-top: 1.5rem;
 }
 
 .step__info {
@@ -436,7 +452,7 @@ button {
   }
 
   .header {
-    padding: 1rem;
+    padding: 1rem 0;
   }
 
   .header__container {
@@ -630,7 +646,7 @@ button {
   }
 
   .header__button {
-    padding: 0.625rem 1rem;
+    display: none;
     font-size: 0.75rem;
   }
 

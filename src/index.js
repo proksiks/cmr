@@ -1,73 +1,85 @@
 let currentStep = 1;
-const totalSteps = 4;
+const totalSteps = 5;
 const quizData = {};
 
-console.log('JavaScript loaded');
 
 // Дополнительная инициализация при загрузке
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM loaded');
-  
+document.addEventListener("DOMContentLoaded", function () {
+
   // Находим все кнопки Далее и добавляем обработчики
-  const btn1 = document.getElementById('btnStep1');
-  const btn2 = document.getElementById('btnStep2');
-  const btn3 = document.getElementById('btnStep3');
-  const btn4 = document.getElementById('btnStep4');
-  
-  if (btn1) btn1.onclick = function() { nextStep(); };
-  if (btn2) btn2.onclick = function() { nextStep(); };
-  if (btn3) btn3.onclick = function() { nextStep(); };
-  if (btn4) btn4.onclick = function() { submitQuiz(); };
-  
+  const btn1 = document.getElementById("btnStep1");
+  const btn2 = document.getElementById("btnStep2");
+  const btn3 = document.getElementById("btnStep3");
+  const btn4 = document.getElementById("btnStep4");
+  const btn5 = document.getElementById("btnStep5");
+
+  if (btn1)
+    btn1.onclick = function () {
+      nextStep();
+    };
+  if (btn2)
+    btn2.onclick = function () {
+      nextStep();
+    };
+  if (btn3)
+    btn3.onclick = function () {
+      nextStep();
+    };
+  if (btn4)
+    btn4.onclick = function () {
+      nextStep();
+    };
+  if (btn5)
+    btn5.onclick = function () {
+      submitQuiz();
+    };
+
   // Находим все кнопки Назад
-  const prevButtons = document.querySelectorAll('.step__button_prev');
-  prevButtons.forEach(btn => {
-    btn.onclick = function() { prevStep(); };
+  const prevButtons = document.querySelectorAll(".step__button_prev");
+  prevButtons.forEach((btn) => {
+    btn.onclick = function () {
+      prevStep();
+    };
   });
-  
+
   // Находим все чекбоксы и добавляем обработчики
-  const checkboxes = document.querySelectorAll('.step__checkbox');
+  const checkboxes = document.querySelectorAll(".step__checkbox");
   checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener('click', function() {
-      const step = parseInt(this.closest('.step').getAttribute('data-step'));
+    checkbox.addEventListener("click", function () {
+      const step = parseInt(this.closest(".step").getAttribute("data-step"));
       selectOption(this, step);
     });
   });
-  
-  console.log('Initialized');
+
 });
 
 // Проверка шага 1 - нужно заполнить страну и выбрать регион
-function checkStep1() {
-  console.log('checkStep1 called');
+function checkStep2() {
   const country = document.getElementById("country");
-  const selectedRegion = document.querySelector(
-    '.step[data-step="1"] .step__checkbox.selected'
-  );
-  
+  const selectedRegion = document.querySelector('.step[data-step="2"] .step__checkbox.selected',);
+
   // Убираем/добавляем класс ошибки
   if (!country.value.trim()) {
-    country.classList.add('step__input_error');
+    country.classList.add("step__input_error");
   } else {
-    country.classList.remove('step__input_error');
+    country.classList.remove("step__input_error");
   }
 }
 
 // Выбор опции
 function selectOption(element, step) {
-  console.log('selectOption called', step, element.dataset.value);
-  
+
   const stepEl = document.querySelector(`.step[data-step="${step}"]`);
   if (!stepEl) return;
-  
+
   stepEl
     .querySelectorAll(".step__checkbox")
     .forEach((opt) => opt.classList.remove("selected"));
   element.classList.add("selected");
   quizData["step" + step] = element.dataset.value;
 
-  if (step === 1) {
-    checkStep1();
+  if (step === 2) {
+    checkStep2();
   }
 }
 
@@ -88,13 +100,21 @@ function formatPhone(input) {
 function checkForm() {
   const name = document.getElementById("name");
   const phone = document.getElementById("phone");
-  
+  const btn = document.getElementById("btnStep5");
+
   // Убираем класс ошибки при вводе
-  if (name.value.trim()) {
-    name.classList.remove('step__input_error');
+  if (name && name.value.trim()) {
+    name.classList.remove("step__input_error");
   }
-  if (phone.value.replace(/\D/g, '').length >= 11) {
-    phone.classList.remove('step__input_error');
+  if (phone && phone.value.replace(/\D/g, "").length >= 11) {
+    phone.classList.remove("step__input_error");
+  }
+
+  // Включаем/выключаем кнопку
+  if (btn) {
+    const nameVal = name ? name.value.trim() : "";
+    const phoneVal = phone ? phone.value.replace(/\D/g, "") : "";
+    btn.disabled = !(nameVal && phoneVal.length >= 11);
   }
 }
 
@@ -103,88 +123,107 @@ function nextStep() {
   // Проверка валидации
   if (currentStep === 1) {
     const country = document.getElementById("country");
-    const selectedRegion = document.querySelector('.step[data-step="1"] .step__checkbox.selected');
-    
+
     // Подсвечиваем пустые поля
     if (!country.value.trim()) {
-      country.classList.add('step__input_error');
+      country.classList.add("step__input_error");
     } else {
-      country.classList.remove('step__input_error');
+      country.classList.remove("step__input_error");
     }
-    
-    if (!selectedRegion) {
-      document.querySelector('.step[data-step="1"] .step__options').classList.add('step__options_error');
-    } else {
-      document.querySelector('.step[data-step="1"] .step__options').classList.remove('step__options_error');
-    }
-    
-    if (!country.value.trim() || !selectedRegion) {
-      return;
-    }
-    
-    const region = quizData["step1"];
-    if (region === "Другой регион") {
-      showErrorStep("error-step-location");
+
+    if (!country.value.trim()) {
       return;
     }
   }
 
   // Проверка шага 2
   if (currentStep === 2) {
-    const selectedHuman = document.querySelector('.step[data-step="2"] .step__checkbox.selected');
-    
-    if (!selectedHuman) {
-      document.querySelector('.step[data-step="2"] .step__options').classList.add('step__options_error');
+    const selectedRegion = document.querySelector('.step[data-step="2"] .step__checkbox.selected');
+
+    if (!selectedRegion) {
+      document.querySelector('.step[data-step="2"] .step__options').classList.add("step__options_error");
       return;
     } else {
-      document.querySelector('.step[data-step="2"] .step__options').classList.remove('step__options_error');
+      document.querySelector('.step[data-step="2"] .step__options').classList.remove("step__options_error");
+    }
+
+    const region = quizData["step2"];
+    if (region === "Другой регион") {
+      showErrorStep("error-step-location");
+      return;
     }
   }
 
-  // Проверка шага 3 - Временная регистрация
+  // Проверка шага 3 - Родственники
   if (currentStep === 3) {
-    const selectedDoc = document.querySelector('.step[data-step="3"] .step__checkbox.selected');
-    
+    const selectedDoc = document.querySelector(
+      '.step[data-step="3"] .step__checkbox.selected',
+    );
+
     if (!selectedDoc) {
-      document.querySelector('.step[data-step="3"] .step__grid').classList.add('step__options_error');
+      document
+        .querySelector('.step[data-step="3"] .step__options')
+        .classList.add("step__options_error");
       return;
     } else {
-      document.querySelector('.step[data-step="3"] .step__grid').classList.remove('step__options_error');
+      document
+        .querySelector('.step[data-step="3"] .step__options')
+        .classList.remove("step__options_error");
     }
-    
-    const service = quizData["step3"];
+  }
+
+  // Проверка шага 4 - Услуги
+  if (currentStep === 4) {
+    const selectedService = document.querySelector(
+      '.step[data-step="4"] .step__checkbox.selected',
+    );
+
+    if (!selectedService) {
+      document
+        .querySelector('.step[data-step="4"] .step__grid')
+        .classList.add("step__options_error");
+      return;
+    } else {
+      document
+        .querySelector('.step[data-step="4"] .step__grid')
+        .classList.remove("step__options_error");
+    }
+
+    const service = quizData["step4"];
     if (service === "Временная регистрация") {
       showErrorStep("error-step-registration");
       return;
     }
   }
 
-  // Шаг 4 - проверка формы
-  if (currentStep === 4) {
+  // Шаг 5 - проверка формы
+  if (currentStep === 5) {
     const name = document.getElementById("name");
     const phone = document.getElementById("phone");
-    
+
     let hasError = false;
-    
+
     if (!name.value.trim()) {
-      name.classList.add('step__input_error');
+      name.classList.add("step__input_error");
       hasError = true;
     } else {
-      name.classList.remove('step__input_error');
+      name.classList.remove("step__input_error");
     }
-    
-    if (!phone.value.trim() || phone.value.replace(/\D/g, '').length < 11) {
-      phone.classList.add('step__input_error');
+
+    if (!phone.value.trim() || phone.value.replace(/\D/g, "").length < 11) {
+      phone.classList.add("step__input_error");
       hasError = true;
     } else {
-      phone.classList.remove('step__input_error');
+      phone.classList.remove("step__input_error");
     }
-    
+
     if (hasError) return;
   }
 
   if (currentStep < totalSteps) {
-    const currentEl = document.querySelector(`.step[data-step="${currentStep}"]`);
+    const currentEl = document.querySelector(
+      `.step[data-step="${currentStep}"]`,
+    );
     if (currentEl) {
       currentEl.classList.remove("active");
     }
@@ -225,23 +264,27 @@ function restartQuiz() {
   const country = document.getElementById("country");
   const name = document.getElementById("name");
   const phone = document.getElementById("phone");
-  
+
   if (country) {
     country.value = "";
-    country.classList.remove('step__input_error');
+    country.classList.remove("step__input_error");
   }
   if (name) {
     name.value = "";
-    name.classList.remove('step__input_error');
+    name.classList.remove("step__input_error");
   }
   if (phone) {
     phone.value = "";
-    phone.classList.remove('step__input_error');
+    phone.classList.remove("step__input_error");
   }
-  
+
+  // Блокируем кнопку отправки
+  const btn5 = document.getElementById("btnStep5");
+  if (btn5) btn5.disabled = true;
+
   // Убираем классы ошибок с опций
-  document.querySelectorAll('.step__options_error').forEach(el => {
-    el.classList.remove('step__options_error');
+  document.querySelectorAll(".step__options_error").forEach((el) => {
+    el.classList.remove("step__options_error");
   });
 
   const firstStep = document.querySelector('.step[data-step="1"]');
@@ -251,7 +294,9 @@ function restartQuiz() {
 // Переход к предыдущему шагу
 function prevStep() {
   if (currentStep > 1) {
-    const currentEl = document.querySelector(`.step[data-step="${currentStep}"]`);
+    const currentEl = document.querySelector(
+      `.step[data-step="${currentStep}"]`,
+    );
     if (currentEl) {
       currentEl.classList.remove("active");
     }
@@ -268,11 +313,11 @@ async function submitQuiz() {
   const nameEl = document.getElementById("name");
   const phoneEl = document.getElementById("phone");
   const countryEl = document.getElementById("country");
-  
-  const name = nameEl ? nameEl.value : '';
-  const phone = phoneEl ? phoneEl.value : '';
-  const country = countryEl ? countryEl.value : '';
-  
+
+  const name = nameEl ? nameEl.value : "";
+  const phone = phoneEl ? phoneEl.value : "";
+  const country = countryEl ? countryEl.value : "";
+
   quizData.name = name;
   quizData.phone = phone;
   quizData.country = country;
@@ -280,7 +325,9 @@ async function submitQuiz() {
   const success = await sendToTelegram(quizData);
 
   if (!success) {
-    alert("Ошибка отправки! Пожалуйста, позвоните нам по телефону +7 (000) 123 45 67");
+    alert(
+      "Ошибка отправки! Пожалуйста, позвоните нам по телефону +7 (000) 123 45 67",
+    );
     return;
   }
 
@@ -306,10 +353,10 @@ async function sendToTelegram(data) {
 
 👤 <b>Имя:</b> ${data.name}
 📞 <b>Телефон:</b> ${data.phone}
-🌍 <b>Гражданство:</b> ${data.country || '-'}
-📍 <b>Регион:</b> ${data.step1 || '-'}
-👨‍👩‍👧 <b>Родственники:</b> ${data.step2 || '-'}
-📄 <b>Услуга:</b> ${data.step3 || '-'}
+🌍 <b>Гражданство:</b> ${data.country || "-"}
+📍 <b>Регион:</b> ${data.step1 || "-"}
+👨‍👩‍👧 <b>Родственники:</b> ${data.step2 || "-"}
+📄 <b>Услуга:</b> ${data.step3 || "-"}
 
 ⏱ Перезвонить в течение 30 минут!`;
 

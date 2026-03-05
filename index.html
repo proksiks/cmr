@@ -44,16 +44,23 @@
                 <div class="step active" data-step="1">
                     <div class="step__left">
                         <div class="step__title">Гражданином какой <br /> страны вы являетесь?</div>
-                        <div class="step__text">Введите вашу страну и выберите регион</div>
-
-                        <div class="step__bottom">
+                    </div>
+                    <div class="step__right">
+                        <div class="step__sub-title">Введите вашу страну и выберите регион</div>
+                        <div class="step__country">
                             <label class="step__label" for="country">Страна гражданства</label>
                             <input class="step__input" type="text" id="country"
                                 placeholder="Например: Узбекистан, Таджикистан, Казахстан...">
                         </div>
+                        <button type="button" class="step__button" id="btnStep1">Далее</button>
+                    </div>
+                </div>
+                <!-- step 2 -->
+                <div class="step" data-step="2">
+                    <div class="step__left">
+                        <div class="step__title">В каком регионе вы находитесь?</div>
                     </div>
                     <div class="step__right">
-                        <div class="step__sub-title">В каком регионе вы находитесь?</div>
                         <div class="step__options">
                             <div class="step__checkbox" data-value="Москва">
                                 <img src="./images/icons/item-1.svg" alt="Иконка">
@@ -68,14 +75,13 @@
                                 Другой регион
                             </div>
                         </div>
-                        <button type="button" class="step__button" id="btnStep1">Далее</button>
+                        <button type="button" class="step__button" id="btnStep2">Далее</button>
                     </div>
                 </div>
-                <!-- step 2 -->
-                <div class="step" data-step="2">
+                <!-- step 3 -->
+                <div class="step" data-step="3">
                     <div class="step__left">
                         <div class="step__title">Есть ли у вас близкие родственники, являющиеся гражданами РФ?</div>
-                        <div class="step__text">Это поможет нам подобрать оптимальную программу</div>
                     </div>
                     <div class="step__right">
                         <div class="step__sub-title">Это поможет нам подобрать оптимальную программу</div>
@@ -99,15 +105,14 @@
                         </div>
                         <div class="step__buttons-row">
                             <button type="button" class="step__button step__button_prev">Назад</button>
-                            <button type="button" class="step__button" id="btnStep2">Далее</button>
+                            <button type="button" class="step__button" id="btnStep3">Далее</button>
                         </div>
                     </div>
                 </div>
-                <!-- step 3 -->
-                <div class="step" data-step="3">
+                <!-- step 4 -->
+                <div class="step" data-step="4">
                     <div class="step__left">
                         <div class="step__title">Какой вид документов или помощь Вам нужна?</div>
-                        <div class="step__text">Выберите услугу из списка</div>
                     </div>
                     <div class="step__right">
                         <div class="step__sub-title">Выберите услугу из списка</div>
@@ -139,25 +144,24 @@
                         </div>
                         <div class="step__buttons-row">
                             <button type="button" class="step__button step__button_prev">Назад</button>
-                            <button type="button" class="step__button" id="btnStep3">Далее</button>
+                            <button type="button" class="step__button" id="btnStep4">Далее</button>
                         </div>
                     </div>
                 </div>
-                <!-- step 4 -->
-                <div class="step" data-step="4">
+                <!-- step 5 -->
+                <div class="step" data-step="5">
                     <div class="step__left">
                         <div class="step__title">Записаться на БЕСПЛАТНУЮ КОНСУЛЬТАЦИЮ!</div>
                         <div class="step__text">Заполните форму и мы свяжемся с вами в течении 30 минут!</div>
                     </div>
                     <div class="step__right step__right_large">
-                        <div class="step__sub-title">В каком регионе вы находитесь?</div>
                         <div class="step__inputs">
                             <label class="step__label" for="name">Ваше Имя</label>
-                            <input class="step__input" type="text" id="name" placeholder="Иванов Иван">
+                            <input class="step__input" type="text" id="name" placeholder="Иванов Иван" oninput="checkForm()">
                         </div>
                         <div class="step__inputs">
                             <label class="step__label" for="phone">Ваш номер телефона</label>
-                            <input class="step__input" type="tel" id="phone" placeholder="+7 (000) 000 00 00">
+                            <input class="step__input" type="tel" id="phone" placeholder="+7 (000) 000 00 00" oninput="formatPhone(this); checkForm()">
                         </div>
                         <div class="step__info">
                             <div class="step__info-text">
@@ -167,7 +171,7 @@
                         </div>
                         <div class="step__buttons-row">
                             <button type="button" class="step__button step__button_prev" onclick="prevStep()">Назад</button>
-                            <button type="button" class="step__button" id="btnStep4" onclick="submitQuiz()">Отправить</button>
+                            <button type="button" class="step__button" id="btnStep5" onclick="submitQuiz()" disabled>Отправить</button>
                         </div>
                     </div>
                 </div>
