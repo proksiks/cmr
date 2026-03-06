@@ -368,10 +368,14 @@ async function submitQuiz() {
   quizData.phone = phone;
   quizData.country = country;
 
-  const success = await sendToTelegram(quizData);
+  // Отправляем данные параллельно в Telegram и Bitrix24
+  const [telegramSuccess, bitrixSuccess] = await Promise.all([
+    sendToTelegram(quizData),
+    sendToBitrix(quizData)
+  ]);
 
-  // Разблокируем кнопку при ошибке
-  if (!success) {
+  // Если обе отправки неуспешны - показываем ошибку
+  if (!telegramSuccess && !bitrixSuccess) {
     isSubmitting = false;
     if (btnEl) {
       btnEl.disabled = false;
@@ -405,8 +409,8 @@ async function submitQuiz() {
 
 // Отправка в Telegram
 async function sendToTelegram(data) {
-  const BOT_TOKEN = "YOUR_BOT_TOKEN";
-  const CHAT_ID = "YOUR_CHAT_ID";
+  const BOT_TOKEN = "8648924298:AAHjwgHrdtxU3oj7NFS0Mh0R-PWS7ryr92I";
+  const CHAT_ID = "676454572";
   const message = `🆕 <b>Новая заявка с сайта Центр миграционных решений!</b>
 
 👤 <b>Имя:</b> ${data.name}
@@ -442,6 +446,54 @@ async function sendToTelegram(data) {
     return true;
   } catch (e) {
     console.error("Telegram error:", e);
+    return false;
+  }
+}
+
+// Отправка в Bitrix24
+async function sendToBitrix(data) {
+  const WEBHOOK_URL = "https://goldenp.bitrix24.ru/rest/8/adtdvivh0b85apws/";
+  
+  // Формируем ответы квиза в текстовом виде
+  const quizAnswers = [
+    `Гражданство: ${data.country || "-"}`,
+    `Регион: ${data.step1 || "-"}`,
+    `Родственники: ${data.step2 || "-"}`,
+    `Услуга: ${data.step3 || "-"}`
+  ].join("\n");
+
+  // Подготовка данных для crm.deal.add
+  const dealData = {
+    fields: {
+      TITLE: `Заявка с сайта: ${data.name}`,
+      NAME: data.name,
+      PHONE: [{ VALUE: data.phone, VALUE_TYPE: "WORK" }],
+      UF_CRM_1772784991336: data.name,          // Имя
+      UF_CRM_1772785020200: data.phone,         // Телефон
+      UF_CRM_1772785034231: data.email || "",  // Email (может быть пустым)
+      UF_CRM_1772785067: quizAnswers,            // Ответы квиза
+      CATEGORY_ID: 2                            // Воронка (направление)
+    }
+  };
+
+  try {
+    const response = await fetch(`${WEBHOOK_URL}crm.deal.add`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dealData)
+    });
+
+    const result = await response.json();
+
+    if (result.error) {
+      console.error("Bitrix24 API error:", result.error);
+      throw new Error(result.error.message || "Failed to create deal");
+    }
+
+    console.log("Deal created successfully:", result.result);
+    return true;
+  } catch (e) {
+    console.error("Bitrix24 error:", e);
     return false;
   }
 }
