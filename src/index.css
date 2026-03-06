@@ -32,7 +32,7 @@ body {
 }
 @media (max-width: 768px) {
   .bg-cover {
-    max-width: 25%;
+    display: none;
   }
 }
 
